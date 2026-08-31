@@ -1,4 +1,4 @@
-/* Shared API helper + auth-state utilities used across all pages. */
+/* Note : Shared API helper + auth-state utilities used across all pages. */
 
 const API_BASE = '/api';
 
