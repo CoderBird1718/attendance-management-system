@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Attendance — Attendify</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">◷ Attendify</div>
+    <nav>
+      <a href="employee.html" class="active">Dashboard</a>
+    </nav>
+    <div class="who">
+      <div class="name" id="sbName">—</div>
+      <div class="role" id="sbRole">—</div>
+      <button class="logout" onclick="Auth.logout()">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-header">
+      <div>
+        <h1>Good day, <span id="firstName">there</span></h1>
+        <p id="todayLabel">—</p>
+      </div>
+    </div>
+
+    <!-- Punch clock -->
+    <div class="punch-card">
+      <div>
+        <div class="punch-time" id="liveClock">--:--:--</div>
+        <div class="punch-date" id="liveDate">—</div>
+        <div class="punch-status-note" id="statusNote">Loading today's status…</div>
+      </div>
+      <div class="punch-actions">
+        <button class="btn btn-outline" id="btnLeave">Apply leave</button>
+        <button class="btn btn-primary" id="btnCheckIn">Check in</button>
+        <button class="btn btn-danger" id="btnCheckOut" style="display:none;">Check out</button>
+      </div>
+    </div>
+
+    <div class="grid cols-3 mt-24">
+      <div class="stat">
+        <div class="badge-leave" id="leaveBalance">—<span>days left</span></div>
+        <div class="label" style="margin-top:8px;">Leave balance</div>
+      </div>
+      <div class="stat">
+        <div class="value" id="monthPresent">—</div>
+        <div class="label">Present days this month</div>
+      </div>
+      <div class="stat">
+        <div class="value" id="monthHours">—</div>
+        <div class="label">Total hours this month</div>
+      </div>
+    </div>
+
+    <div class="card mt-24">
+      <div class="flex-between">
+        <h2 class="section-title" style="margin:0;">Attendance history</h2>
+        <input type="month" id="monthFilter" style="width:auto;" />
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Check-in</th><th>Check-out</th><th>Working hours</th><th>Status</th></tr>
+          </thead>
+          <tbody id="historyBody">
+            <tr class="empty-row"><td colspan="5">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Apply leave modal -->
+<div class="modal-backdrop" id="leaveModal">
+  <div class="modal">
+    <h3>Apply for leave</h3>
+    <p class="lead">This deducts 1 day from your leave balance and marks the date as On Leave.</p>
+    <div class="field">
+      <label for="leaveDate">Date</label>
+      <input type="date" id="leaveDate" />
+    </div>
+    <div class="field">
+      <label for="leaveRemarks">Reason (optional)</label>
+      <input id="leaveRemarks" placeholder="e.g. Personal work" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeLeaveModal()">Cancel</button>
+      <button class="btn btn-primary" id="confirmLeave">Confirm leave</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/employee.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+backend/database/attendance.db
+backend/database/attendance.db-shm
+backend/database/attendance.db-wal
+.env
+*.log
+.DS_Store

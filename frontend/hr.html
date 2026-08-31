@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HR Dashboard — Attendify</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">◷ Attendify</div>
+    <nav>
+      <a href="#" class="tab-link active" data-tab="overview">Overview</a>
+      <a href="#" class="tab-link" data-tab="employees">Employees</a>
+      <a href="#" class="tab-link" data-tab="attendance">Attendance records</a>
+    </nav>
+    <div class="who">
+      <div class="name" id="sbName">—</div>
+      <div class="role" id="sbRole">—</div>
+      <button class="logout" onclick="Auth.logout()">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <section id="tab-overview">
+      <div class="main-header">
+        <div>
+          <h1>Attendance overview</h1>
+          <p>Snapshot of today's attendance across the organization.</p>
+        </div>
+        <div class="field" style="margin:0; width:auto;">
+          <input type="date" id="overviewDate" style="width:auto;" />
+        </div>
+      </div>
+
+      <div class="grid cols-4" id="statGrid">
+        <div class="stat"><div class="value" id="statTotal">—</div><div class="label">Total employees</div></div>
+        <div class="stat"><div class="value" id="statPresent">—</div><div class="label">Present today</div></div>
+        <div class="stat"><div class="value" id="statLate">—</div><div class="label">Late today</div></div>
+        <div class="stat"><div class="value" id="statAbsent">—</div><div class="label">Absent today</div></div>
+      </div>
+
+      <div class="card mt-24">
+        <div class="flex-between">
+          <div>
+            <h2 class="section-title" style="margin-bottom:2px;">Mark absentees</h2>
+            <p class="muted" style="margin:0; font-size:13.5px;">For the selected date, marks everyone with no attendance record as Absent and deducts 1 leave day.</p>
+          </div>
+          <button class="btn btn-outline" id="btnMarkAbsent">Mark absentees for this date</button>
+        </div>
+      </div>
+
+      <div class="card mt-24">
+        <h2 class="section-title">Today's attendance</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Employee</th><th>Department</th><th>Check-in</th><th>Check-out</th><th>Hours</th><th>Status</th></tr></thead>
+            <tbody id="overviewBody"><tr class="empty-row"><td colspan="6">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMPLOYEES -->
+    <section id="tab-employees" style="display:none;">
+      <div class="main-header">
+        <div>
+          <h1>Employees</h1>
+          <p>Manage your team's profiles and leave balances.</p>
+        </div>
+        <button class="btn btn-primary" id="btnAddEmployee">Add employee</button>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Department</th><th>Designation</th><th>Leave balance</th><th>Status</th><th></th></tr></thead>
+            <tbody id="employeesBody"><tr class="empty-row"><td colspan="7">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATTENDANCE RECORDS -->
+    <section id="tab-attendance" style="display:none;">
+      <div class="main-header">
+        <div>
+          <h1>Attendance records</h1>
+          <p>Search and filter attendance across the whole team.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="grid cols-4">
+          <div class="field" style="margin:0;"><label>From</label><input type="date" id="filterFrom" /></div>
+          <div class="field" style="margin:0;"><label>To</label><input type="date" id="filterTo" /></div>
+          <div class="field" style="margin:0;">
+            <label>Status</label>
+            <select id="filterStatus">
+              <option value="">All</option>
+              <option>Present</option>
+              <option>Late</option>
+              <option>Half Day</option>
+              <option>On Leave</option>
+              <option>Absent</option>
+            </select>
+          </div>
+          <div class="field" style="margin:0; display:flex; align-items:flex-end;">
+            <button class="btn btn-primary btn-block" id="btnFilter">Apply filters</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-24">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Employee</th><th>Department</th><th>Check-in</th><th>Check-out</th><th>Hours</th><th>Status</th></tr></thead>
+            <tbody id="recordsBody"><tr class="empty-row"><td colspan="7">Choose filters and apply.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Add employee modal -->
+<div class="modal-backdrop" id="empModal">
+  <div class="modal">
+    <h3>Add employee</h3>
+    <p class="lead">Creates a login the employee can use immediately.</p>
+    <div class="field"><label>Full name</label><input id="newName" /></div>
+    <div class="field"><label>Email</label><input id="newEmail" type="email" /></div>
+    <div class="field-row">
+      <div class="field"><label>Department</label><input id="newDept" placeholder="Engineering" /></div>
+      <div class="field"><label>Designation</label><input id="newDesig" placeholder="Software Developer" /></div>
+    </div>
+    <div class="field"><label>Temporary password</label><input id="newPassword" type="text" placeholder="At least 6 characters" /></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeEmpModal()">Cancel</button>
+      <button class="btn btn-primary" id="confirmAddEmployee">Add employee</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit employee modal -->
+<div class="modal-backdrop" id="editModal">
+  <div class="modal">
+    <h3>Edit employee</h3>
+    <p class="lead" id="editWho"></p>
+    <div class="field-row">
+      <div class="field"><label>Department</label><input id="editDept" /></div>
+      <div class="field"><label>Designation</label><input id="editDesig" /></div>
+    </div>
+    <div class="field"><label>Leave balance (days)</label><input id="editLeave" type="number" step="0.5" /></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeEditModal()">Cancel</button>
+      <button class="btn btn-primary" id="confirmEditEmployee">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/hr.js"></script>
+</body>
+</html>

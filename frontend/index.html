@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Attendify — Employee Attendance Management</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="auth-shell">
+  <div class="auth-hero">
+    <div class="clock-face"></div>
+    <div class="brand">◷ Attendify</div>
+    <div>
+      <div class="headline">Every check-in, every hour, accounted for.</div>
+      <p class="sub">A single place for your team to clock in, track working hours, and manage leave — and for HR to see it all at a glance.</p>
+    </div>
+    <div class="sub" style="font-size:13px;">Inner Eye Consultancy Services LLP</div>
+  </div>
+
+  <div class="auth-form-wrap">
+    <div class="auth-form">
+      <div class="auth-tabs">
+        <button id="tabLogin" class="active" onclick="switchTab('login')">Log in</button>
+        <button id="tabRegister" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <div id="alertBox"></div>
+
+      <!-- LOGIN -->
+      <form id="loginForm">
+        <h2>Welcome back</h2>
+        <p class="lead">Log in to check in and view your attendance.</p>
+        <div class="field">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" type="email" required placeholder="you@company.com" />
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password" required placeholder="••••••••" />
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Log in</button>
+        <p class="hint">Demo HR account: hr@company.com / Hr@12345<br />Demo employee: asha@company.com / Employee@123</p>
+      </form>
+
+      <!-- REGISTER -->
+      <form id="registerForm" style="display:none;">
+        <h2>Create your account</h2>
+        <p class="lead">Register as an employee or HR administrator.</p>
+        <div class="field">
+          <label for="regName">Full name</label>
+          <input id="regName" required placeholder="Jordan Lee" />
+        </div>
+        <div class="field">
+          <label for="regEmail">Email</label>
+          <input id="regEmail" type="email" required placeholder="you@company.com" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="regDept">Department</label>
+            <input id="regDept" placeholder="Engineering" />
+          </div>
+          <div class="field">
+            <label for="regRole">Account type</label>
+            <select id="regRole">
+              <option value="employee">Employee</option>
+              <option value="hr">HR Administrator</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="regPassword">Password</label>
+          <input id="regPassword" type="password" required placeholder="At least 6 characters" />
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Create account</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+  // If already logged in, go straight to the right dashboard.
+  (function redirectIfLoggedIn() {
+    const user = Auth.getUser();
+    if (user && Auth.getToken()) {
+      window.location.href = user.role === 'hr' ? 'hr.html' : 'employee.html';
+    }
+  })();
+
+  function switchTab(tab) {
+    const isLogin = tab === 'login';
+    document.getElementById('tabLogin').classList.toggle('active', isLogin);
+    document.getElementById('tabRegister').classList.toggle('active', !isLogin);
+    document.getElementById('loginForm').style.display = isLogin ? 'block' : 'none';
+    document.getElementById('registerForm').style.display = isLogin ? 'none' : 'block';
+    document.getElementById('alertBox').innerHTML = '';
+  }
+
+  function showAlert(message, type = 'error') {
+    document.getElementById('alertBox').innerHTML =
+      `<div class="alert alert-${type}">${message}</div>`;
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    try {
+      const data = await apiRequest('/auth/login', { method: 'POST', body: { email, password } });
+      Auth.setSession(data.token, data.user);
+      window.location.href = data.user.role === 'hr' ? 'hr.html' : 'employee.html';
+    } catch (err) {
+      showAlert(err.message);
+    }
+  });
+
+  document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      name: document.getElementById('regName').value.trim(),
+      email: document.getElementById('regEmail').value.trim(),
+      department: document.getElementById('regDept').value.trim(),
+      role: document.getElementById('regRole').value,
+      password: document.getElementById('regPassword').value,
+    };
+    try {
+      const data = await apiRequest('/auth/register', { method: 'POST', body: payload });
+      Auth.setSession(data.token, data.user);
+      window.location.href = data.user.role === 'hr' ? 'hr.html' : 'employee.html';
+    } catch (err) {
+      showAlert(err.message);
+    }
+  });
+</script>
+</body>
+</html>
