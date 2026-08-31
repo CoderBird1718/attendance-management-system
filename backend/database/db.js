@@ -1,7 +1,3 @@
-/**
- * Database connection + schema initialization.
- * Uses SQLite via better-sqlite3 - a single file database, zero setup required.
- */
 const path = require('path');
 const Database = require('better-sqlite3');
 
