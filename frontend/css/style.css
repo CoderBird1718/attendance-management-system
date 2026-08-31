@@ -1,12 +1,3 @@
-/* ============================================================
-   Attendify — Design tokens
-   Concept: a digital time-clock. Space Grotesk carries the
-   numeral/display personality (punch-clock digits); Inter
-   handles dense UI/table content. Status colour = information,
-   not decoration — every attendance state has one fixed hue
-   used consistently across the whole app.
-   ============================================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
@@ -243,7 +234,7 @@ tbody tr:hover { background: #FAFAF8; }
 .table-wrap { overflow-x: auto; }
 .empty-row td { text-align: center; color: var(--ink-soft); padding: 30px; }
 
-/* ---------- Alerts / toast ---------- */
+/* ---------- Alerts ---------- */
 .alert {
   border-radius: 8px;
   padding: 12px 14px;
@@ -342,7 +333,7 @@ tbody tr:hover { background: #FAFAF8; }
 .auth-tabs button.active { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
 .hint { font-size: 12.5px; color: var(--ink-soft); margin-top: 6px; }
 
-/* ---------- Punch clock (employee dashboard hero) ---------- */
+/* ---------- Employee dashboard hero ---------- */
 .punch-card {
   background: var(--sidebar);
   color: #fff;
