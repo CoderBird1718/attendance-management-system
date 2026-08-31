@@ -118,7 +118,7 @@ Configurable in `backend/utils/calculations.js`:
 
 ```bash
 # 1. Clone the repository
-git clone [<YOUR_GITHUB_REPO_URL>](https://github.com/CoderBird1718/attendance-management-system.git)
+git clone https://github.com/CoderBird1718/attendance-management-system.git
 cd attendance-management-system
 
 # 2. Install backend dependencies
