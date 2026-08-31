@@ -1,7 +1,7 @@
 /**
+ * To Remember while forming up :-
  * Core business rules for the Attendance Management System.
- *
- * Shift timings (configurable):
+ * Shift timings:
  *   Shift start        : 09:30
  *   Grace period ends  : 09:45  -> after this, employee is marked "Late"
  *   Full day threshold : 8 hours worked
@@ -27,10 +27,7 @@ function calculateWorkingHours(checkIn, checkOut) {
   return Math.max(0, Math.round(hours * 100) / 100);
 }
 
-/**
- * Determines status + leave deduction once check-out happens.
- * Returns { status, leaveDeducted }
- */
+
 function evaluateAttendance(checkIn, workingHours) {
   const isLateArrival = toMinutes(checkIn) > toMinutes(GRACE_END);
 
