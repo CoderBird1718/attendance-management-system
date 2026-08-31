@@ -117,8 +117,8 @@ Configurable in `backend/utils/calculations.js`:
 ## 8. Setup & Run Instructions
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/CoderBird1718/attendance-management-system.git
+# 1. Open the terminal
+cd desktop
 cd attendance-management-system
 
 # 2. Install backend dependencies
@@ -234,27 +234,25 @@ attendance-management-system/
 
 **Deliverables covered by this repository:**
 
--  Complete source code — backend (Node.js/Express) and frontend (HTML/CSS/JS)
--  Database scripts — schema definition (`db.js`) and seed data (`seed.js`)
--  Setup instructions — see [§8](#8-setup--run-instructions)
--  Environment configuration template — `.env.example`
--  API documentation — see [§10](#10-api-reference)
--  This README as the primary project documentation
+- ✅ Complete source code — backend (Node.js/Express) and frontend (HTML/CSS/JS)
+- ✅ Database scripts — schema definition (`db.js`) and seed data (`seed.js`)
+- ✅ Setup instructions — see [§8](#8-setup--run-instructions)
+- ✅ Environment configuration template — `.env.example`
+- ✅ API documentation — see [§10](#10-api-reference)
+- ✅ This README as the primary project documentation
 
 ## 13. Publishing to GitHub
 
 ```bash
-cd attendance-management-system
+git init
 git add .
-git commit -m "Employee Attendance Management System - initial submission"
-
-# Create a new empty repository on GitHub first (via github.com), then:
+git commit -m "first submission"
 git branch -M main
-git remote add origin https://github.com/<your-username>/<your-repo-name>.git
+git remote add origin https://github.com/CoderBird1718/attendance-management-system.git
 git push -u origin main
 ```
 
-Submit the resulting repository URL — e.g. `https://github.com/<your-username>/attendance-management-system` — as the assignment deliverable.
+Submit the resulting repository URL — `https://github.com/CoderBird1718/attendance-management-system` — as the assignment deliverable.
 
 > **Note:** `backend/database/attendance.db` is intentionally excluded via `.gitignore`. Anyone who clones the repository generates a fresh database by running `npm run seed`, so no personal or demo data is committed to version control.
 
