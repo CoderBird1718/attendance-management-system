@@ -1,8 +1,3 @@
-/**
- * Seeds the database with a default HR account and a couple of sample
- * employees so the app can be explored immediately after setup.
- * Run with: npm run seed
- */
 const bcrypt = require('bcryptjs');
 const db = require('./db');
 
