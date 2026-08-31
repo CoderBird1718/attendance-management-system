@@ -129,7 +129,7 @@ npm install
 cp .env.example .env
 # Open .env and set a real JWT_SECRET (any long random string)
 
-# 4. (Recommended) Seed demo accounts and sample data
+# 4. Seed demo accounts and sample data
 npm run seed
 
 # 5. Start the server
