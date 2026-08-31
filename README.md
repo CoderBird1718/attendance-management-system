@@ -146,7 +146,7 @@ Created automatically by `npm run seed`:
 |---|---|---|
 | HR Administrator | `hr@company.com` | `Hr@12345` |
 | Employee | `asha@company.com` | `Employee@123` |
-| Employee | `rohit@company.com` | `Employee@123` |
+| Employee | `doobye@company.com` | `Employee@123` |
 
 New accounts (either role) can also be created directly from the login page.
 
