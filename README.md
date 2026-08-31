@@ -4,7 +4,7 @@
 
 Prepared for: **MT — Developer Assignment, Inner Eye Consultancy Services LLP**
 
-This repository contains the complete deliverable for the assignment: full source code (backend + frontend), database schema and seed scripts, environment configuration, setup instructions, and API documentation — everything required to clone, install, and run the application locally.
+This repository contains the complete deliverable for the assignment : full source code (backend + frontend), database schema and seed scripts, environment configuration, setup instructions, and API documentation — everything required to install and run the application locally.
 
 ---
 
