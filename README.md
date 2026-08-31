@@ -138,12 +138,6 @@ npm start
 
 The application is now running at **http://localhost:5000** — open that URL in your browser. The Express server serves both the API and the frontend, so nothing else needs to be started separately.
 
-For development with auto-restart on file changes:
-
-```bash
-npm run dev
-```
-
 ## 9. Demo Accounts
 
 Created automatically by `npm run seed`:
