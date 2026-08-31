@@ -228,12 +228,12 @@ attendance-management-system/
 
 **Deliverables covered by this repository:**
 
-- ✅ Complete source code — backend (Node.js/Express) and frontend (HTML/CSS/JS)
-- ✅ Database scripts — schema definition (`db.js`) and seed data (`seed.js`)
-- ✅ Setup instructions — see [§8](#8-setup--run-instructions)
-- ✅ Environment configuration template — `.env.example`
-- ✅ API documentation — see [§10](#10-api-reference)
-- ✅ This README as the primary project documentation
+-  Complete source code — backend (Node.js/Express) and frontend (HTML/CSS/JS)
+-  Database scripts — schema definition (`db.js`) and seed data (`seed.js`)
+-  Setup instructions — see [§8](#8-setup--run-instructions)
+-  Environment configuration template — `.env.example`
+-  API documentation — see [§10](#10-api-reference)
+-  This README as the primary project documentation
 
 ## 13. Publishing to GitHub
 
